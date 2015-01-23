@@ -35,11 +35,6 @@
         return;
     }
 
-    if(!$.event.special.throttledresize) {
-        console.log('throttledresize function is missing - Exiting off-canvas nav');
-        return;
-    }
-
     var menuActivated = false, // so skiplink event is only applied once
         configureMenu = function () {
 
@@ -75,10 +70,14 @@
           }
         };
 
-    // reconfigure menu when viewport is resized
-    $(window).on("throttledresize", function () {
-      configureMenu();
-    });
+    if(!$.event.special.throttledresize) {
+        console.log('throttledresize is missing - Nav will not reconfigure on resize');
+    } else {
+        // reconfigure menu when viewport is resized
+        $(window).on("throttledresize", function () {
+          configureMenu();
+        });
+    }
 
     configureMenu();
 
