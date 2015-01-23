@@ -1,2 +1,1 @@
-# OffCanvasMobileNav
-Off Canvas Mobile Navigation Pattern
+# Off Canvas Mobile Navigation Pattern
