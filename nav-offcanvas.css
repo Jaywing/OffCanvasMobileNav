@@ -1,0 +1,43 @@
+/*------------------------------------*\
+    NAV-OFFCANVAS.CSS
+
+    DEPENDANCIES
+        nav-offcanvas.js
+\*------------------------------------*/
+
+.js-container {
+  min-height: 100%;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  -ms-transition: all 0.25s ease;
+  -moz-transition: all 0.25s ease;
+  -webkit-transition: all 0.25s ease;
+  transition: all 0.25s ease 0s;
+  width: 100%;
+  z-index: 2; }
+  .js-container.slid {
+    right: 75%; }
+
+.skip-to-nav {
+  float: right;
+  margin: 0;
+  display: none; }
+  .skip-to-nav.persist {
+    display: block; }
+  .skip-to-nav a {
+    display: block; }
+    .skip-to-nav a:after {
+      content: " ≡"; }
+    .skip-to-nav a:hover, .skip-to-nav a:focus {
+      text-decoration: none; }
+    .slid .skip-to-nav a:after {
+      content: ' x'; }
+
+.js-offcanvas {
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 75%;
+  z-index: 1; }
+  
