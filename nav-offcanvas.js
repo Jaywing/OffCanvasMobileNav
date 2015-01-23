@@ -28,13 +28,11 @@
     'use strict';
 
     if (!doc.querySelector || !win.addEventListener) {
-        // doesn't cut the mustard.
         console.log('This browser don\'t cut the Mustard - Exiting off-canvas nav');
         return;
     }
 
     if(!$.event.special.throttledresize) {
-        // throttled resize doesn't exist
         console.log('throttledresize function is missing - Exiting off-canvas nav');
         return;
     }
