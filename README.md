@@ -5,8 +5,8 @@ The Menu stays static on browsers that can not support the pattern or where java
 
 ## Javascript
 
-Use the 'mobileBreakPoint' variable set the width at when the offcanvas menu kicks in.
-Setting 'mobileBreakPoint' to 'null' will force the offcanvas menu in all viewport sizes.
+Use the `mobileBreakPoint` variable set the width at when the offcanvas menu kicks in.
+Setting `mobileBreakPoint` to `null` will force the offcanvas menu in all viewport sizes.
 
 ### jQuery version
 
