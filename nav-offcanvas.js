@@ -59,6 +59,7 @@
               }
               if(!menuActivated) {
                 $skiplink.click(togglePage);
+                menuActivated = true;
               }
               $newnav.append($primary);
               $newnav.addClass('js-offcanvas');
@@ -69,7 +70,6 @@
               $skiplink.after($primary).removeClass('persist');
               $page.removeClass(toggleclass);
           }
-          menuActivated = true;
         };
 
     // reconfigure menu when viewport is resized
