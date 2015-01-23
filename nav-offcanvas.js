@@ -22,6 +22,9 @@
 
    </div>
  *
+ * OPTIONS
+ *   Set *mobileBreakPoint* to *null* to show the offcanvas menu in all viewport sizes
+ *
  */
 
 (function (win, doc, $) {
