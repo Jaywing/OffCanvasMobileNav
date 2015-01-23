@@ -2,8 +2,7 @@
  * Off-canvas pattern for navigation.
  *
  * Dependancies:
- *   jQuery
- *   throttledresize.js - https://github.com/louisremi/jquery-smartresize
+ *
  *
  * Author:
  *   James Taylor
@@ -22,12 +21,9 @@
 
    </div>
  *
- * OPTIONS
- *   Set *mobileBreakPoint* to *null* to show the offcanvas menu in all viewport sizes
- *
  */
 
-(function (win, doc, $) {
+(function (win, doc) {
     'use strict';
 
     if (!doc.querySelector || !win.addEventListener) {
@@ -38,47 +34,38 @@
     var menuActivated = false, // so skiplink event is only applied once
         configureMenu = function () {
 
-          var toggleclass        = 'slid',
-              $page             = $('.js-container'),
-              $primary          = $('.nav-global-primary'),
-              $skiplink         = $('.skip-to-nav'),
-              $newnav           = $(doc.createElement('div')),
-              $body             = $('body'),
+          var toggleclass       = 'slid',
+              reg               = new RegExp('(\\s|^)' + toggleclass + '(\\s|$)'),
+              page              = doc.querySelector('.js-container'),
+              primary           = doc.querySelector('.nav-global-primary'),
+              skiplink          = doc.querySelector('.skip-to-nav'),
+              newnav            = doc.createElement('div'),
               mobileBreakPoint  = 623,
               togglePage = function(e) {
                   e.preventDefault();
-                  $page.toggleClass(toggleclass);
+                  if (!page.className.match(reg)) {
+                      page.className += ' ' + toggleclass;
+                  } else {
+                      page.className = page.className.replace(reg, '');
+                  }
               };
 
-          if ($body.width() < mobileBreakPoint) {
+          if (doc.documentElement.clientWidth < mobileBreakPoint || mobileBreakPoint === null) {
               // If the viewport is small enough, use the off-canvas pattern for navigation
-              if (!$page || !$primary || !$skiplink) {
+              if (!page || !primary || !skiplink) {
                   return;
               }
               if(!menuActivated) {
-                $skiplink.click(togglePage);
+                skiplink.addEventListener('click', togglePage, false);;
                 menuActivated = true;
               }
-              $newnav.append($primary);
-              $newnav.addClass('js-offcanvas');
-              $skiplink.addClass('persist');
-              $body.append($newnav);
-          } else {
-              // If the viewport is large enough, reset the off-canvas navigation
-              $skiplink.after($primary).removeClass('persist');
-              $page.removeClass(toggleclass);
+              newnav.appendChild(primary);
+              newnav.className = 'js-offcanvas';
+              skiplink.className = skiplink.className + ' persist';
+              doc.body.appendChild(newnav);
           }
         };
 
-    if(!$.event.special.throttledresize) {
-        console.log('throttledresize is missing - Nav will not reconfigure on resize');
-    } else {
-        // reconfigure menu when viewport is resized
-        $(window).on("throttledresize", function () {
-          configureMenu();
-        });
-    }
-
     configureMenu();
 
-}(this, this.document, jQuery));
+}(this, this.document));
