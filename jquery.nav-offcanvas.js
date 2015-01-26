@@ -52,14 +52,19 @@
               if (!$page || !$primary || !$skiplink) {
                   return;
               }
-              if(!menuActivated) {
+              if (!menuActivated) {
                 $skiplink.click(togglePage);
                 menuActivated = true;
               }
-              $newnav.append($primary);
-              $newnav.addClass('js-offcanvas');
+              if ($('.js-offcanvas').length < 1) { // if off-canvas menu does not exist
+                $newnav.append($primary);
+                $newnav.addClass('js-offcanvas');
+                $body.append($newnav); // create it and append to body
+              } else {
+                $('.js-offcanvas').append($primary); // append primary to off canvas menu
+              }
               $skiplink.addClass('persist');
-              $body.append($newnav);
+
           } else {
               // If the viewport is large enough, reset the off-canvas navigation
               $skiplink.after($primary).removeClass('persist');
@@ -67,7 +72,7 @@
           }
         };
 
-    if(!$.event.special.throttledresize) {
+    if (!$.event.special.throttledresize) {
         console.log('throttledresize function is missing - Navigation will not change when the viewport resizes');
     } else {
         // reconfigure menu when viewport is resized
