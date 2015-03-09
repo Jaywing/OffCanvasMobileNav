@@ -33,6 +33,7 @@
     }
 
     var menuActivated = false, // so skiplink event is only applied once
+        mobileBreakPoint  = 623, // set to null if you want a permanent off canvas menu
         configureMenu = function () {
 
           var toggleclass        = 'slid',
@@ -41,7 +42,6 @@
               $skiplink         = $('.skip-to-nav'),
               $newnav           = $(doc.createElement('div')),
               $body             = $('body'),
-              mobileBreakPoint  = 623,
               togglePage = function(e) {
                   e.preventDefault();
                   $page.toggleClass(toggleclass);
@@ -72,13 +72,15 @@
           }
         };
 
-    if (!$.event.special.throttledresize) {
-        console.log('throttledresize function is missing - Navigation will not change when the viewport resizes');
-    } else {
-        // reconfigure menu when viewport is resized
-        $(window).on("throttledresize", function () {
-          configureMenu();
-        });
+    if (mobileBreakPoint !== null) {
+       if (!$.event.special.throttledresize) {
+           console.log('throttledresize function is missing - Navigation will not change when the viewport resizes');
+       } else {
+           // reconfigure menu when viewport is resized
+           $(window).on("throttledresize", function () {
+             configureMenu();
+           });
+       }
     }
 
     configureMenu();
